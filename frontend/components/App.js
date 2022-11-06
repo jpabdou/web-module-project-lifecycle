@@ -18,9 +18,9 @@ export default class App extends React.Component {
 
   submitTodo = (evt) => {
     evt.preventDefault();
-    axios.post(URL, {name: this.state.pending, completed: false, id: String(Math.random()*10000-1)})
+    axios.post(URL, {name: this.state.pending})
       .then(res=>{
-        this.setState({todos: this.state.todos.concat(res.data.data)})
+        this.getTodos()
         this.setState({pending: ""})
       })
   }
@@ -37,21 +37,21 @@ export default class App extends React.Component {
   todoCheck = (id, status) => {
     axios.patch(`${URL}/${id}`, {completed: !status})
       .then(res=>{
-        this.state.todos.splice(this.state.todos.findIndex(element=>element.id===id), 1, res.data.data)
-        this.setState({todos: this.state.todos})
+        this.getTodos()
       })
       .catch(error=>console.log(error))
   }
 
+  getTodos = ()=>{
+    axios.get(URL)
+    .then(res=>{
+      this.setState({...this.state, todos: res.data.data})})
+    .catch(err=>console.log(err))
+  }
+
   componentDidMount(){
     console.log("mounted")
-    const getTodos = ()=>{
-      axios.get(URL)
-      .then(res=>{
-        this.setState({todos: res.data.data})})
-      .catch(err=>console.log(err))
-    }
-    getTodos()
+    this.getTodos()
 
   }
 
