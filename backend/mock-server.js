@@ -52,12 +52,12 @@ function catchAll(req, res, ctx) {
 
 
 const handlers = [
-  rest.get('https://jpabdou.github.io/web-module-project-lifecycle/api/todos', getAll),
-  rest.get('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', getById),
-  rest.post('https://jpabdou.github.io/web-module-project-lifecycle/api/todos', create),
-  rest.patch('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', toggleDone),
-  rest.delete('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', remove),
-  rest.all('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/*', catchAll),
+  rest.get('http://localhost:9000/api/todos', getAll),
+  rest.get('http://localhost:9000/api/todos/:id', getById),
+  rest.post('http://localhost:9000/api/todos', create),
+  rest.patch('http://localhost:9000/api/todos/:id', toggleDone),
+  rest.delete('http://localhost:9000/api/todos/:id', remove),
+  rest.all('http://localhost:9000/*', catchAll),
 ]
 
 module.exports = setupServer(...handlers)
