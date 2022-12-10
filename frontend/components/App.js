@@ -3,7 +3,7 @@ import React from 'react'
 import TodoList from './TodoList';
 import Form from './Form';
 
-const URL = 'https://jpabdou.github.io/web-module-project-lifecycle/api/todos'
+const URL = 'http://localhost:9000/api/todos'
 
 export default class App extends React.Component {
   constructor(){
