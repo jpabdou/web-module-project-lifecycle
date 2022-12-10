@@ -84,10 +84,21 @@ const toggleDone = async id => {
   return [status, { message, data }]
 }
 
+const remove = async id => {
+  let message, data, status
+  todos = todos.filter(d => {
+    return d.id !== id
+  })
+    status = 200
+    message = `Successfully deleted Todo ${id}`
+  return [status, { message, todos }]
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   toggleDone,
+  remove,
   resetTodos, // only tests use this
 }

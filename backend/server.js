@@ -11,23 +11,28 @@ server.use(express.static(path.join(__dirname, '../dist')))
 
 server.use(cors())
 
-server.get('/api/todos', async (req, res) => {
+server.get('https://jpabdou.github.io/web-module-project-lifecycle/api/todos', async (req, res) => {
   const [status, response] = await Todo.getAll()
   res.status(status).json(response)
 })
 
-server.get('/api/todos/:id', async (req, res) => {
+server.get('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', async (req, res) => {
   const [status, response] = await Todo.getById(req.params.id)
   res.status(status).json(response)
 })
 
-server.post('/api/todos', async (req, res) => {
+server.post('https://jpabdou.github.io/web-module-project-lifecycle/api/todos', async (req, res) => {
   const [status, response] = await Todo.create(req.body)
   res.status(status).json(response)
 })
 
-server.patch('/api/todos/:id', async (req, res) => {
+server.patch('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', async (req, res) => {
   const [status, response] = await Todo.toggleDone(req.params.id)
+  res.status(status).json(response)
+})
+
+server.delete('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', async (req, res) => {
+  const [status, response] = await Todo.remove(req.params.id)
   res.status(status).json(response)
 })
 

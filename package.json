@@ -1,14 +1,18 @@
 {
   "name": "web-module-project-component-lifecycle",
   "version": "0.0.1",
+  "homepage": "https://jpabdou.github.io/web-module-project-redux",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "fkill :9000 :3000 -s && concurrently \"npm:backend\" \"npm:frontend\"",
     "test": "cross-env NODE_ENV=testing jest",
     "webpack": "cross-env NODE_ENV=production webpack",
     "heroku-postbuild": "npm run webpack",
-    "frontend": "webpack serve --open",
+    "frontend": "webpack serve --open --config webpack.dev.js",
     "backend": "node index.js",
-    "start": "npm run backend"
+    "start": "npm run backend",
+    "build": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
     "@babel/core": "7.17.5",
@@ -27,6 +31,7 @@
     "eslint": "8.10.0",
     "eslint-plugin-react": "7.29.2",
     "fkill-cli": "7.1.0",
+    "gh-pages": "^4.0.0",
     "html-loader": "3.1.0",
     "html-webpack-plugin": "5.5.0",
     "jest": "27.5.1",

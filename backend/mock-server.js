@@ -34,6 +34,14 @@ async function toggleDone(req, res, ctx) {
   )
 }
 
+async function remove(req, res, ctx) {
+  const [status, payload] = await Todo.remove(req.params.id)
+  return res(
+    ctx.status(status),
+    ctx.json(payload),
+  );
+}
+
 function catchAll(req, res, ctx) {
   const message = `Endpoint [${req.method}] /${req.params['0']} does not exist`
   return res(
@@ -42,12 +50,14 @@ function catchAll(req, res, ctx) {
   )
 }
 
+
 const handlers = [
-  rest.get('http://localhost:9000/api/todos', getAll),
-  rest.get('http://localhost:9000/api/todos/:id', getById),
-  rest.post('http://localhost:9000/api/todos', create),
-  rest.patch('http://localhost:9000/api/todos/:id', toggleDone),
-  rest.all('http://localhost:9000/*', catchAll),
+  rest.get('https://jpabdou.github.io/web-module-project-lifecycle/api/todos', getAll),
+  rest.get('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', getById),
+  rest.post('https://jpabdou.github.io/web-module-project-lifecycle/api/todos', create),
+  rest.patch('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', toggleDone),
+  rest.delete('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/:id', remove),
+  rest.all('https://jpabdou.github.io/web-module-project-lifecycle/api/todos/*', catchAll),
 ]
 
 module.exports = setupServer(...handlers)

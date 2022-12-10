@@ -5,13 +5,13 @@ export default class TodoList extends React.Component {
   render() {
     return(
       <div className='todos'>
-      {this.props.todos.map((todo)=>{
+      {this.props.todos && this.props.todos.map((todo)=>{
         if (this.props.state.hideComplete) {
             if (todo.completed === false) {
-              return(<Todo check={this.props.todoCheck} id={todo.id} name={todo.name} status={todo.completed} key={todo.id} />)
+              return(<Todo delete={this.props.delete} check={this.props.todoCheck} id={todo.id} name={todo.name} status={todo.completed} key={todo.id} />)
             }
           } else {
-            return(<Todo check={this.props.todoCheck} id={todo.id} name={todo.name} status={todo.completed} key={todo.id} />)
+            return(<Todo delete={this.props.delete} check={this.props.todoCheck} id={todo.id} name={todo.name} status={todo.completed} key={todo.id} />)
 
           }
 

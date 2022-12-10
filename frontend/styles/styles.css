@@ -38,7 +38,8 @@ h1 {
 
 h2 {
   font-size: 1.2rem;
-  line-height: 3rem;
+  width: 80vw;
+  text-align: center;
 }
 
 h3 {
@@ -82,4 +83,22 @@ ul, form {
 
 .todo:hover {
   cursor: pointer;
+}
+
+.todo-item {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+
+.todos {
+  margin-top: 5rem;
+  height: 20rem;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.todo-form {
+  text-align: center;
 }

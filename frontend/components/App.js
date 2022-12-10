@@ -3,11 +3,10 @@ import React from 'react'
 import TodoList from './TodoList';
 import Form from './Form';
 
-const URL = 'http://localhost:9000/api/todos'
+const URL = 'https://jpabdou.github.io/web-module-project-lifecycle/api/todos'
 
 export default class App extends React.Component {
   constructor(){
-    console.log("constructed")
     super();
     this.state={
       todos: [],
@@ -20,6 +19,7 @@ export default class App extends React.Component {
     evt.preventDefault();
     axios.post(URL, {name: this.state.pending})
       .then(res=>{
+         console.log(res)
         this.getTodos()
         this.setState({pending: ""})
       })
@@ -49,17 +49,26 @@ export default class App extends React.Component {
     .catch(err=>console.log(err))
   }
 
+  deleteTodo = (id)=>{
+    axios.delete(`${URL}/${id}`)
+    .then(res=>{
+      console.log(res.data)
+      this.setState({...this.state, todos: res.data.todos})
+        })
+    .catch(err=>{
+        console.log(err.response);
+    })
+}
+
   componentDidMount(){
-    console.log("mounted")
     this.getTodos()
 
   }
 
   render() {
-    console.log("rendered")
     return(
       <div>
-      <TodoList todos={this.state.todos} state={this.state} todoCheck={this.todoCheck}/>
+      <TodoList todos={this.state.todos} state={this.state} todoCheck={this.todoCheck} delete={this.deleteTodo}/>
       <Form state={this.state} setPending={this.setPending} submit={this.submitTodo} hide={this.hideCompleted}/>
       </div>
 
